@@ -25,20 +25,21 @@ public class BaseTest {
     private EventFiringWebDriver driver;
     protected CountryPage countryPage;
 
+    @BeforeClass
     public void setUpRemote() throws MalformedURLException {
         Capabilities chromeOptions = DesiredCapabilities.chrome();
-        driver = new EventFiringWebDriver(new RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions));
+        driver = new EventFiringWebDriver(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions));
         driver.register(new EventReporter());
         goMain();
     }
 
-    @BeforeClass
-    public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "src/chromedriver");
-        driver = new EventFiringWebDriver(new ChromeDriver());
-        driver.register(new EventReporter());
-        goMain();
-    }
+//    @BeforeClass
+//    public void setUp(){
+//        System.setProperty("webdriver.chrome.driver", "src/chromedriver");
+//        driver = new EventFiringWebDriver(new ChromeDriver());
+//        driver.register(new EventReporter());
+//        goMain();
+//    }
 
     @BeforeMethod
     public void goMain(){
